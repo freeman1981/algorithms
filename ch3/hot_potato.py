@@ -1,4 +1,4 @@
-from algorithms.lib.queue import Queue
+from lib.queue import Queue
 
 
 def play(players, num):

@@ -1,4 +1,4 @@
-from algorithms.lib.dequeue import Deque
+from lib.dequeue import Deque
 
 
 def is_pallindrome(input_str):

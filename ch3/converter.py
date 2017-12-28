@@ -1,4 +1,4 @@
-from algorithms.lib.stack import Stack
+from lib.stack import Stack
 
 
 def dec_to_bin(number, base):
