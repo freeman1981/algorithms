@@ -17,3 +17,10 @@ class Stack:
 
     def is_empty(self):
         return not bool(self.__items)
+
+    @classmethod
+    def from_iterable(cls, iterable):
+        inst = cls()
+        for item in iterable:
+            inst.push(item)
+        return inst

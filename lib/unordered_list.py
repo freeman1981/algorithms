@@ -32,27 +32,26 @@ class UnorderedList:
         current = self.head
         count = 0
         while current is not None:
-            count = count + 1
+            count += 1
             current = current.get_next()
         return count
 
     def search(self, item):
         current = self.head
-        found = False
-        while current is not None and not found:
+        while current is not None:
             if current.get_data() == item:
-                found = True
-            else:
-                current = current.get_next()
-        return found
+                return True
+            current = current.get_next()
+        return False
 
     def remove(self, item):
         current = self.head
         previous = None
-        found = False
-        while not found:
+        while True:
+            if current is None:
+                raise ValueError('No {} in list'.format(item))
             if current.get_data() == item:
-                found = True
+                break
             else:
                 previous = current
                 current = current.get_next()
@@ -60,3 +59,10 @@ class UnorderedList:
             self.head = current.get_next()
         else:
             previous.set_next(current.get_next())
+
+    @classmethod
+    def from_iterable(cls, iterable):
+        inst = cls()
+        for item in iterable:
+            inst.add(item)
+        return inst
