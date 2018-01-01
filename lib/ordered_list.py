@@ -1,17 +1,38 @@
 from lib.node import Node
 
 
-class UnorderedList:
+class OrderedList:
     def __init__(self):
         self.head = None
+
+    @staticmethod
+    def _compare(item, current_item):
+        return item < current_item
 
     def is_empty(self):
         return self.head is None
 
     def add(self, item):
-        temp = Node(item)
-        temp.set_next(self.head)
-        self.head = temp
+        current = self.head
+        new_node = Node(item)
+        if current is None:
+            self.head = new_node
+            return
+        previous = None
+        while current is not None:
+            if self._compare(item, current.get_data()):
+                new_node.set_next(current)
+                if previous is not None:
+                    previous.set_next(new_node)
+                else:
+                    self.head = new_node
+                return
+            previous = current
+            next_ = current.get_next()
+            if next_ is None:
+                current.set_next(new_node)
+                return
+            current = next_
 
     def size(self):
         current = self.head
@@ -24,6 +45,8 @@ class UnorderedList:
     def search(self, item):
         current = self.head
         while current is not None:
+            if not self._compare(item, current.get_data()):
+                return False
             if current.get_data() == item:
                 return True
             current = current.get_next()
